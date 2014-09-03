@@ -13,13 +13,13 @@ The primary goal of this library is to solve those 2 problems in a way I don't h
 
 ## Form Basics
 
-Open a form tag:
+Open a form:
 
 ``` php
 <?=Form::open(['method' => 'POST', 'action' => 'home/submit'])?>
 ```
 
-Close a Form
+Close a form:
 ``` php
 <?=Form::close()?>
 ```
@@ -50,7 +50,7 @@ Do you prefer to build your element entirely in PHP? Use the builder.
 
 Build a text box named "username".
 ``` php
-<?=Form::text('username')->getValue()?>
+<?=Form::text('username')?>
 ```
 
 You can also pre-populate it from the previous form submission with `Form::setData()`.

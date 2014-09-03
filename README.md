@@ -117,9 +117,9 @@ Form::setData(['pets' => ['Dog', 'Fish']]);
 ```
 
 ``` php
-<input type="checkbox" name="pets" value='Cat' <?=Form::checked('pets', 'Cat')?> /> Cat
-<input type="checkbox" name="pets" value='Dog' <?=Form::checked('pets', 'Dog')?> /> Dog
-<input type="checkbox" name="pets" value='Fish' <?=Form::checked('pets', 'Fish')?> /> Fish
+<input type="checkbox" name="pets" value="Cat" <?=Form::checked('pets', 'Cat')?> /> Cat
+<input type="checkbox" name="pets" value="Dog" <?=Form::checked('pets', 'Dog')?> /> Dog
+<input type="checkbox" name="pets" value="Fish" <?=Form::checked('pets', 'Fish')?> /> Fish
 ```
 
 ``` php

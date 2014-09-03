@@ -58,7 +58,7 @@ You can also pre-populate it from the previous form submission with `Form::setDa
 <?=Form::text('username')->getValue()?>
 ```
 
-Ore pre-populate it from the previous form submission with `Form::setData()` with a default if there was no previous submission.
+Or pre-populate it from the previous form submission with `Form::setData()` with a default if there was no previous submission.
 ``` php
 <?=Form::text('username')->getValue('josh')?>
 ```

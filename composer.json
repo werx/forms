@@ -1,5 +1,5 @@
 {
-	"name": "werx\forms",
+	"name": "werx/forms",
 	"type": "library",
 	"license": "MIT",
 	"description": "Framework agnostic form helpers",

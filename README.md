@@ -118,14 +118,14 @@ Form::setData(['pets' => ['Dog', 'Fish']]);
 
 ``` php
 <input type="checkbox" name="pets" value='Cat' <?=Form::checked('pets', 'Cat')?> /> Cat
-<input type="checkbox" name="pets" value='Dog' <?=Form::checked('pets', 'Dog')?> /> <-- This one will be checked.
-<input type="checkbox" name="pets" value='Fish' <?=Form::checked('pets', 'Fish')?> /> <-- This one will be checked.
+<input type="checkbox" name="pets" value='Dog' <?=Form::checked('pets', 'Dog')?> /> Dog
+<input type="checkbox" name="pets" value='Fish' <?=Form::checked('pets', 'Fish')?> /> Fish
 ```
 
 ``` php
 <?=Form::checkbox('pets')->value('Cat')?> Cat
-<?=Form::checkbox('pets')->value('Dog')?> Dog <-- This one will be checked.
-<?=Form::checkbox('pets')->value('Fish')?> Fish <-- This one will be checked.
+<?=Form::checkbox('pets')->value('Dog')?> Dog
+<?=Form::checkbox('pets')->value('Fish')?> Fish
 ```
 > In the previous 2 examples, Dog and Fish were automatically checked because of the value from `Form::setData()`.
 
@@ -134,7 +134,7 @@ Form::setData(['pets' => ['Dog', 'Fish']]);
 <?=Form::checkbox('colors')->value('Blue')->checked()?> Blue
 <?=Form::checkbox('colors')->value('Green')?> Green
 ```
-> In this example, we manually forced 'Blue' to be checked using.
+> In this example, we manually forced 'Blue' to be checked.
 
 ### Buttons
 

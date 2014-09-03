@@ -1,0 +1,30 @@
+{
+	"name": "werx\forms",
+	"type": "library",
+	"license": "MIT",
+	"description": "Framework agnostic form helpers",
+	"keywords": ["form", "input", "helper"],
+	"authors":[
+		{
+			"name": "Josh Moody",
+			"email": "josh@moody.io"
+		}
+	],
+	    
+    "require": {
+    	"php": ">= 5.4"
+    },
+
+    "require-dev": {
+        "phpunit/phpunit": "3.7.*",
+        "squizlabs/php_codesniffer": "1.*",
+		"league/plates": "1.0.*"
+    },
+        	
+	"autoload":	{
+		"psr-4": {
+			"werx\\Forms\\": "src/",
+			"werx\\Forms\\Tests\\": "tests/"
+		}
+	}
+}

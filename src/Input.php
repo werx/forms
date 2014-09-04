@@ -15,7 +15,6 @@ namespace werx\Forms;
 class Input
 {
 	protected $attributes = [];
- 	protected $form;
 
 	public function __construct($name = null, $id = null)
 	{
@@ -31,17 +30,23 @@ class Input
 			$this->attribute('id', $id);
 		}
 
-		return $this;	
+		return $this;
 	}
 
-	public function getValue($default = null, $escape = true){
-		$value = Form::getValue($this->attributes['name'], $default, $escape);
+	public function getValue($default = null, $escape = true)
+	{
+		// First, see if there is already a value attribute. If so, use it.
+		$value = $this->getAttribute('value');
+
+		if (empty($value)) {
+			$value = Form::getValue($this->attributes['name'], $default, $escape);
+		}
 
 		if ($escape === true) {
 			$value = htmlspecialchars($value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
 		}
 
-		$this->value($value);
+		$this->attribute('value', $value);
 
 		return $this;
 	}
@@ -56,7 +61,7 @@ class Input
 	public function attribute($key, $value = null)
 	{
 		$this->attributes[$key] = $value;
- 
+
 		return $this;
 	}
 
@@ -70,25 +75,30 @@ class Input
 	 * @param array $value
 	 * @return $this
 	 */
-	public function __call($method, $value=[])
+	public function __call($method, $value = [])
 	{
 		if (property_exists($this, $method)) {
 			$this->$method = $value[0];
 			return $this;
 		} else {
-			return $this->attribute($method, $value[0]);			
+			return $this->attribute($method, $value[0]);
 		}
 	}
- 
+
 	public function __toString()
 	{
+		$value = $this->getValue()->getAttribute('value');
+
+		if (empty($value)) {
+			unset($this->attributes['value']);
+		}
+
 		$attribute_parts = [];
- 
-		foreach($this->attributes as $k => $v)
-		{
+
+		foreach ($this->attributes as $k => $v) {
 			$attribute_parts[] = sprintf('%s="%s"', $k, $v);
 		}
- 
+
 		return sprintf('<input %s />', join(' ', $attribute_parts));
 	}
 }

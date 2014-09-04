@@ -4,36 +4,52 @@ namespace werx\Forms;
 
 class Select extends Input
 {
-	protected $attributes;
-	protected $value;
 	protected $data;
+	protected $label;
 
 	public function selected($value)
 	{
 		return $this->value($value);
 	}
 
+	public function label($display, $value = '')
+	{
+		$this->label = (object) array('display' => $display, 'value' => $value);
+
+		return $this;
+	}
+
 	public function __toString()
 	{
+		$selected = $this->getValue()->getAttribute('value');
+
 		$attribute_parts = [];
- 
+
 		$html = [];
-		
-		foreach($this->attributes as $k => $v)
-		{
+
+		foreach ($this->attributes as $k => $v) {
+
+			if ($k == 'value') {
+				continue;
+			}
+
 			$attribute_parts[] = sprintf('%s="%s"', $k, $v);
 		}
- 
+
 		$html[] = sprintf('<select %s>', join(' ', $attribute_parts));
 		
 		$options = [];
 
+		if (!empty($this->label)) {
+			$options[] = sprintf('<option value="%s">%s</option>', $this->label->value, $this->label->display);
+		}
+
 		foreach ($this->data as $k => $v) {
 
-			if ($k == $this->value) {
-				$options[] = sprintf('<option selected="selected" value="%s">%s</option>', $k, $v);					
+			if ($k == $selected) {
+				$options[] = sprintf('<option selected="selected" value="%s">%s</option>', $k, $v);
 			} else {
-				$options[] = sprintf('<option value="%s">%s</option>', $k, $v);	
+				$options[] = sprintf('<option value="%s">%s</option>', $k, $v);
 			}
 		}
 

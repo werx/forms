@@ -27,7 +27,7 @@ class Checkbox extends Input
 			if (!empty($values) && $item_value == $values) {
 				$this->checked();
 			}
-		} else if ($type == 'checkbox') {
+		} elseif ($type == 'checkbox') {
 			if (in_array($item_value, $values)) {
 				$this->checked();
 			}
@@ -49,8 +49,7 @@ class Checkbox extends Input
 
 		$attribute_parts = [];
 
-		foreach($this->attributes as $k => $v)
-		{
+		foreach ($this->attributes as $k => $v) {
 			$attribute_parts[] = sprintf('%s="%s"', $k, $v);
 		}
 

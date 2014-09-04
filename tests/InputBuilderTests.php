@@ -6,7 +6,7 @@ use werx\Forms\Form;
 class InputBuilderTests extends \PHPUnit_Framework_TestCase
 {
 
-	public function testTextBuildsCorrectHtml()
+	public function testTextBuildsExpectedHtml()
 	{
 		Form::clear();
 
@@ -24,7 +24,16 @@ class InputBuilderTests extends \PHPUnit_Framework_TestCase
 		$this->assertEquals($expected, $actual);
 	}
 
-	public function testTextCanSetData()
+	public function testTextCanSetRequired()
+	{
+		Form::clear();
+
+		$actual = (string) Form::text('test')->required();
+		$expected = '<input name="test" id="test" type="text" required="required" />';
+		$this->assertEquals($expected, $actual);
+	}
+
+	public function testTextCanSetDataExplicit()
 	{
 		Form::clear();
 
@@ -33,6 +42,18 @@ class InputBuilderTests extends \PHPUnit_Framework_TestCase
 		$actual = (string) Form::text('test')->getValue();
 		$expected = '<input name="test" id="test" type="text" value="werx" />';
 		$this->assertEquals($expected, $actual);
+	}
+
+	public function testTextCanSetDataImplicit()
+	{
+		Form::clear();
+
+		Form::setData(['test' => 'werx']);
+
+		$actual = (string) Form::text('test');
+		$expected = '<input name="test" id="test" type="text" value="werx" />';
+		$this->assertEquals($expected, $actual);
+
 	}
 
 	public function testTextCanSetDataWithDefaultOnMissingValue()
@@ -44,22 +65,32 @@ class InputBuilderTests extends \PHPUnit_Framework_TestCase
 		$this->assertEquals($expected, $actual);
 	}
 
-	public function testSelectBuildsCorrectHtml()
+	public function testSelectBuildsExpectedHtml()
 	{
 		Form::clear();
 
-		$actual = (string) Form::select('test')->data(['TX' => 'Texas', 'AR' => 'Arkansas', 'OK' => 'Oklahoma']);
-		$expected = '<select name="test" id="test"><option value="TX">Texas</option><option value="AR">Arkansas</option><option value="OK">Oklahoma</option></select>';
+		$actual = (string) Form::select('state')->data(['TX' => 'Texas', 'AR' => 'Arkansas', 'OK' => 'Oklahoma']);
+		$expected = '<select name="state" id="state"><option value="TX">Texas</option><option value="AR">Arkansas</option><option value="OK">Oklahoma</option></select>';
 
 		$this->assertEquals($expected, $actual);
 	}
 
-	public function testSelectBuildsCorrectHtmlWithLabel()
+	public function testSelectBuildsExpectedHtmlWithLabel()
 	{
 		Form::clear();
 
-		$actual = (string) Form::select('test')->data(['' => 'Choose', 'TX' => 'Texas', 'AR' => 'Arkansas', 'OK' => 'Oklahoma']);
-		$expected = '<select name="test" id="test"><option selected="selected" value="">Choose</option><option value="TX">Texas</option><option value="AR">Arkansas</option><option value="OK">Oklahoma</option></select>';
+		$actual = (string) Form::select('state')->data(['TX' => 'Texas', 'AR' => 'Arkansas', 'OK' => 'Oklahoma'])->label('Choose');
+		$expected = '<select name="state" id="state"><option value="">Choose</option><option value="TX">Texas</option><option value="AR">Arkansas</option><option value="OK">Oklahoma</option></select>';
+
+		$this->assertEquals($expected, $actual);
+	}
+
+	public function testSelectBuildsExpectedHtmlWithLabelValue()
+	{
+		Form::clear();
+
+		$actual = (string) Form::select('state')->data(['TX' => 'Texas', 'AR' => 'Arkansas', 'OK' => 'Oklahoma'])->label('Choose', 'xx');
+		$expected = '<select name="state" id="state"><option value="xx">Choose</option><option value="TX">Texas</option><option value="AR">Arkansas</option><option value="OK">Oklahoma</option></select>';
 
 		$this->assertEquals($expected, $actual);
 	}
@@ -68,22 +99,32 @@ class InputBuilderTests extends \PHPUnit_Framework_TestCase
 	{
 		Form::clear();
 
-		$actual = (string) Form::select('test')->selected('AR')->data(['TX' => 'Texas', 'AR' => 'Arkansas', 'OK' => 'Oklahoma']);
-		$expected = '<select name="test" id="test"><option value="TX">Texas</option><option selected="selected" value="AR">Arkansas</option><option value="OK">Oklahoma</option></select>';
+		$actual = (string) Form::select('state')->selected('AR')->data(['TX' => 'Texas', 'AR' => 'Arkansas', 'OK' => 'Oklahoma']);
+		$expected = '<select name="state" id="state"><option value="TX">Texas</option><option selected="selected" value="AR">Arkansas</option><option value="OK">Oklahoma</option></select>';
 
 		$this->assertEquals($expected, $actual);
 	}
 
-	public function testSelectCanSetSelectedWithGetValue()
+	public function testSelectCanSetSelectedFromFormDataExplicit()
 	{
 		Form::clear();
 
-		Form::setData(['test' => 'AR']);
-		$actual = (string) Form::select('test')->getValue()->data(['TX' => 'Texas', 'AR' => 'Arkansas', 'OK' => 'Oklahoma']);
-		$expected = '<select name="test" id="test"><option value="TX">Texas</option><option selected="selected" value="AR">Arkansas</option><option value="OK">Oklahoma</option></select>';
-
+		Form::setData(['state' => 'AR']);
+		$actual = (string) Form::select('state')->getValue()->data(['TX' => 'Texas', 'AR' => 'Arkansas', 'OK' => 'Oklahoma']);
+		$expected = '<select name="state" id="state"><option value="TX">Texas</option><option selected="selected" value="AR">Arkansas</option><option value="OK">Oklahoma</option></select>';
 		$this->assertEquals($expected, $actual);
 	}
+
+	public function testSelectCanSetSelectedFromFormDataImplicit()
+	{
+		Form::clear();
+
+		Form::setData(['state' => 'AR']);
+		$actual = (string) Form::select('state')->data(['TX' => 'Texas', 'AR' => 'Arkansas', 'OK' => 'Oklahoma']);
+		$expected = '<select name="state" id="state"><option value="TX">Texas</option><option selected="selected" value="AR">Arkansas</option><option value="OK">Oklahoma</option></select>';
+		$this->assertEquals($expected, $actual);
+	}
+
 
 	public function testSelectCanSetSelectedWithGetValueOnMissingValue()
 	{
@@ -95,7 +136,7 @@ class InputBuilderTests extends \PHPUnit_Framework_TestCase
 		$this->assertEquals($expected, $actual);
 	}
 
-	public function testCheckboxBuildsCorrectHtml()
+	public function testCheckboxBuildsExpectedHtml()
 	{
 		Form::clear();
 
@@ -105,7 +146,36 @@ class InputBuilderTests extends \PHPUnit_Framework_TestCase
 		$this->assertEquals($expected, $actual);
 	}
 
-	public function testRadioBuildsCorrectHtml()
+	public function testCheckBoxCanCheckSelected()
+	{
+		Form::clear();
+
+		Form::setData(['pets' => ['Cat', 'Fish']]);
+
+		$actual = (string) Form::checkbox('pets')->value('Cat');
+		$expected = '<input type="checkbox" name="pets" id="pets" value="Cat" checked="checked" />';
+		$this->assertEquals($expected, $actual);
+
+		$actual = (string) Form::checkbox('pets')->value('Fish');
+		$expected = '<input type="checkbox" name="pets" id="pets" value="Fish" checked="checked" />';
+		$this->assertEquals($expected, $actual);
+
+		$actual = (string) Form::checkbox('pets')->value('Dog');
+		$expected = '<input type="checkbox" name="pets" id="pets" value="Dog" />';
+		$this->assertEquals($expected, $actual);
+	}
+
+	public function testCheckBoxCanManuallySetSelected()
+	{
+		Form::clear();
+
+		$actual = (string) Form::checkbox('pets')->value('Cat')->checked();
+		$expected = '<input type="checkbox" name="pets" id="pets" value="Cat" checked="checked" />';
+
+		$this->assertEquals($expected, $actual);
+	}
+
+	public function testRadioBuildsExpectedHtml()
 	{
 		Form::clear();
 
@@ -115,7 +185,36 @@ class InputBuilderTests extends \PHPUnit_Framework_TestCase
 		$this->assertEquals($expected, $actual);
 	}
 
-	public function testHiddenBuildsCorrectHtml()
+	public function testRadioCanCheckSelected()
+	{
+		Form::clear();
+
+		Form::setData(['pet' => 'Cat']);
+
+		$actual = (string) Form::radio('pet')->value('Cat');
+		$expected = '<input type="radio" name="pet" id="pet" value="Cat" checked="checked" />';
+		$this->assertEquals($expected, $actual);
+
+		$actual = (string) Form::radio('pet')->value('Fish');
+		$expected = '<input type="radio" name="pet" id="pet" value="Fish" />';
+		$this->assertEquals($expected, $actual);
+
+		$actual = (string) Form::radio('pet')->value('Dog');
+		$expected = '<input type="radio" name="pet" id="pet" value="Dog" />';
+		$this->assertEquals($expected, $actual);
+	}
+
+	public function testRadioCanManuallySetSelected()
+	{
+		Form::clear();
+
+		$actual = (string) Form::radio('pet')->value('Cat')->checked();
+		$expected = '<input type="radio" name="pet" id="pet" value="Cat" checked="checked" />';
+
+		$this->assertEquals($expected, $actual);
+	}
+
+	public function testHiddenBuildsExpectedHtml()
 	{
 		Form::clear();
 
@@ -125,7 +224,7 @@ class InputBuilderTests extends \PHPUnit_Framework_TestCase
 		$this->assertEquals($expected, $actual);
 	}
 
-	public function testPasswordBuildsCorrectHtml()
+	public function testPasswordBuildsExpectedHtml()
 	{
 		Form::clear();
 
@@ -135,7 +234,7 @@ class InputBuilderTests extends \PHPUnit_Framework_TestCase
 		$this->assertEquals($expected, $actual);
 	}
 
-	public function testEmailBuildsCorrectHtml()
+	public function testEmailBuildsExpectedHtml()
 	{
 		Form::clear();
 
@@ -145,7 +244,7 @@ class InputBuilderTests extends \PHPUnit_Framework_TestCase
 		$this->assertEquals($expected, $actual);
 	}
 
-	public function testUrlBuildsCorrectHtml()
+	public function testUrlBuildsExpectedHtml()
 	{
 		Form::clear();
 
@@ -155,12 +254,72 @@ class InputBuilderTests extends \PHPUnit_Framework_TestCase
 		$this->assertEquals($expected, $actual);
 	}
 
-	public function testTelBuildsCorrectHtml()
+	public function testTelBuildsExpectedHtml()
 	{
 		Form::clear();
 
 		$actual = (string) Form::tel('test');
 		$expected = '<input name="test" id="test" type="tel" />';
+
+		$this->assertEquals($expected, $actual);
+	}
+
+	public function testButtonBuildsExpectedHtml()
+	{
+		Form::clear();
+
+		$actual = (string) Form::button('test');
+		$expected = '<button name="test" id="test">Submit</button>';
+
+		$this->assertEquals($expected, $actual);
+	}
+
+	public function testButtonBuildsExpectedHtmlWithCustomLabel()
+	{
+		Form::clear();
+
+		$actual = (string) Form::button('test')->label('Back');
+		$expected = '<button name="test" id="test">Back</button>';
+
+		$this->assertEquals($expected, $actual);
+	}
+
+	public function testSubmitBuildsExpectedHtml()
+	{
+		Form::clear();
+
+		$actual = (string) Form::submit('test');
+		$expected = '<button type="submit" name="test" id="test">Submit</button>';
+
+		$this->assertEquals($expected, $actual);
+	}
+
+	public function testSubmitBuildsExpectedHtmlWithCustomLabel()
+	{
+		Form::clear();
+
+		$actual = (string) Form::submit('test')->label('Search');
+		$expected = '<button type="submit" name="test" id="test">Search</button>';
+
+		$this->assertEquals($expected, $actual);
+	}
+
+	public function testTextAreaBuildsExpectedHtml()
+	{
+		Form::clear();
+
+		$actual = (string) Form::textarea('test');
+		$expected = '<textarea name="test" id="test"></textarea>';
+
+		$this->assertEquals($expected, $actual);
+	}
+
+	public function testTextAreaBuildsExpectedHtmlWithValue()
+	{
+		Form::clear();
+
+		$actual = (string) Form::textarea('test')->value('Foo');
+		$expected = '<textarea name="test" id="test">Foo</textarea>';
 
 		$this->assertEquals($expected, $actual);
 	}

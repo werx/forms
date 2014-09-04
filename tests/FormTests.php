@@ -25,6 +25,28 @@ class FormsTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals($expected, $actual);
 	}
 
+	public function testCanCloseFormTag()
+	{
+		Form::clear();
+
+		$actual = Form::close();
+		$expected = '</form>';
+
+		$this->assertEquals($expected, $actual);
+	}
+
+	public function testCanGetFormData()
+	{
+		Form::clear();
+
+		Form::setData(['foo' => 'bar']);
+
+		$data = Form::getData();
+
+		$this->assertArrayHasKey('foo', $data);
+		$this->assertEquals('bar', $data['foo']);
+	}
+
 	public function testGetValue()
 	{
 		Form::clear();
@@ -62,5 +84,67 @@ class FormsTest extends \PHPUnit_Framework_TestCase
 
 		Form::setData(['test' => '<script>alert("xss")</script>']);
 		$this->assertEquals('<script>alert("xss")</script>', Form::getValue('test', null, false));
+	}
+
+	public function testGetCheckedReturnsExpectedHtml()
+	{
+		Form::clear();
+
+		Form::setData(['foo' => 'bar']);
+
+		$actual = Form::getChecked('foo', 'bar');
+		$expected = 'checked = "checked"';
+
+		$this->assertEquals($expected, $actual);
+	}
+
+	public function testGetCheckedReturnsExpectedHtmlArray()
+	{
+		Form::clear();
+
+		Form::setData(['fruits' => ['apples', 'oranges']]);
+
+		$actual = Form::getChecked('fruits', 'apples');
+		$expected = 'checked = "checked"';
+		$this->assertEquals($expected, $actual);
+
+		$actual = Form::getChecked('fruits', 'oranges');
+		$expected = 'checked = "checked"';
+		$this->assertEquals($expected, $actual);
+
+		$actual = Form::getChecked('fruits', 'pears');
+		$expected = null;
+		$this->assertEquals($expected, $actual, 'Pears should not be checked.');
+	}
+
+	public function testGetSelectedReturnsExpectedHtml()
+	{
+		Form::clear();
+
+		Form::setData(['foo' => 'bar']);
+
+		$actual = Form::getSelected('foo', 'bar');
+		$expected = 'selected = "selected"';
+
+		$this->assertEquals($expected, $actual);
+	}
+
+	public function testGetSelectedReturnsExpectedHtmlArray()
+	{
+		Form::clear();
+
+		Form::setData(['fruits' => ['apples', 'oranges']]);
+
+		$actual = Form::getSelected('fruits', 'apples');
+		$expected = 'selected = "selected"';
+		$this->assertEquals($expected, $actual);
+
+		$actual = Form::getSelected('fruits', 'oranges');
+		$expected = 'selected = "selected"';
+		$this->assertEquals($expected, $actual);
+
+		$actual = Form::getSelected('fruits', 'pears');
+		$expected = null;
+		$this->assertEquals($expected, $actual, 'Pears should not be selected.');
 	}
 }

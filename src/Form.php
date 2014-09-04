@@ -231,7 +231,7 @@ class Form
 	 * @param string $checked_html
 	 * @return string
 	 */
-	public static function checked($key, $value = null, $checked_html = 'checked = "checked"')
+	public static function getChecked($key, $value = null, $checked_html = 'checked = "checked"')
 	{
 		$instance = static::getInstance();
 
@@ -247,7 +247,7 @@ class Form
 			$checked = true;
 		}
 
-		return $checked ? $checked_html : '';
+		return $checked ? $checked_html : null;
 	}
 
 	/**
@@ -256,8 +256,8 @@ class Form
 	 * @param string $checked_html
 	 * @return string
 	 */
-	public static function selected($key, $value = null, $checked_html = 'selected = "selected"')
+	public static function getSelected($key, $value = null, $checked_html = 'selected = "selected"')
 	{
-		return static::checked($key, $value, $checked_html);
+		return static::getChecked($key, $value, $checked_html);
 	}
 }

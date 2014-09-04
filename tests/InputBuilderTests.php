@@ -75,6 +75,16 @@ class InputBuilderTests extends \PHPUnit_Framework_TestCase
 		$this->assertEquals($expected, $actual);
 	}
 
+	public function testSelectCanSetArrayValuesAsOptionValues()
+	{
+		Form::clear();
+
+		$actual = (string) Form::select('color')->data(['Red', 'White', 'Blue'], true)->selected('White');
+		$expected = '<select name="color" id="color"><option value="Red">Red</option><option selected="selected" value="White">White</option><option value="Blue">Blue</option></select>';
+
+		$this->assertEquals($expected, $actual);
+	}
+
 	public function testSelectBuildsExpectedHtmlWithLabel()
 	{
 		Form::clear();

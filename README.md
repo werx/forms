@@ -47,8 +47,13 @@ Form::setData($_POST);
 ```
 
 ``` php
-<?=Form::select('state')->data(['TX' => 'Texas', 'AR' => 'Arkansas', 'OK' => 'Oklahoma'])->label('Choose');?>
+<?=Form::select('state')->data(['TX' => 'Texas', 'AR' => 'Arkansas', 'OK' => 'Oklahoma'])->label('Choose')?>
 ```
+
+```php
+<?=Form::select('color')->data(['Red', 'White', 'Blue'], true)->selected('White')?>
+```
+
 ### Checkboxes and Radios
 
 ``` php

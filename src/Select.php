@@ -6,10 +6,17 @@ class Select extends Input
 {
 	protected $data;
 	protected $label;
+	protected $use_array_values = false;
 
 	public function selected($value)
 	{
 		return $this->value($value);
+	}
+
+	public function data($data = [], $use_array_values = false) {
+		$this->data = $data;
+		$this->use_array_values = $use_array_values;
+		return $this;
 	}
 
 	public function label($display, $value = '')
@@ -45,6 +52,11 @@ class Select extends Input
 		}
 
 		foreach ($this->data as $k => $v) {
+
+			if ($this->use_array_values) {
+				// Using the array value as the option value, instead of the array index.
+				$k = $v;
+			}
 
 			if ($k == $selected) {
 				$options[] = sprintf('<option selected="selected" value="%s">%s</option>', $k, $v);

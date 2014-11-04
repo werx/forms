@@ -11,6 +11,7 @@ namespace werx\Forms;
  * @method value($value) Default Value
  * @method id($id) Element Id
  * @method name($name) Element Name
+ * @method placeholder($value) Placeholder for input
  */
 class Input
 {

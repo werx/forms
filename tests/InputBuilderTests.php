@@ -65,6 +65,15 @@ class InputBuilderTests extends \PHPUnit_Framework_TestCase
 		$this->assertEquals($expected, $actual);
 	}
 
+	public function testTextSetPlaceholder()
+	{
+		Form::clear();
+
+		$actual = (string) Form::text('test')->placeholder('werx');
+		$expected = '<input name="test" id="test" type="text" placeholder="werx" />';
+		$this->assertEquals($expected, $actual);
+	}
+
 	public function testSelectBuildsExpectedHtml()
 	{
 		Form::clear();

@@ -2,30 +2,11 @@
 
 namespace werx\Forms;
 
-class Select extends Input
+class SelectState extends Select
 {
 	protected $data;
 	protected $label;
 	protected $use_array_values = false;
-
-	public function selected($value)
-	{
-		return $this->value($value);
-	}
-
-	public function data($data = [], $use_array_values = false)
-	{
-		$this->data = $data;
-		$this->use_array_values = $use_array_values;
-		return $this;
-	}
-
-	public function label($display, $value = '')
-	{
-		$this->label = (object) array('display' => $display, 'value' => $value);
-
-		return $this;
-	}
 
 	public function __toString()
 	{
@@ -36,6 +17,7 @@ class Select extends Input
 		$html = [];
 
 		foreach ($this->attributes as $k => $v) {
+
 			if ($k == 'value') {
 				continue;
 			}
@@ -51,7 +33,12 @@ class Select extends Input
 			$options[] = sprintf('<option value="%s">%s</option>', $this->label->value, $this->label->display);
 		}
 
+		if (empty($this->data)) {
+			$this->data = $this->getDefaultData();
+		}
+
 		foreach ($this->data as $k => $v) {
+
 			if ($this->use_array_values) {
 				// Using the array value as the option value, instead of the array index.
 				$k = $v;
@@ -68,5 +55,10 @@ class Select extends Input
 		$html[] = '</select>';
 		
 		return join('', $html);
+	}
+
+	protected function getDefaultData()
+	{
+		return Data::states();
 	}
 }

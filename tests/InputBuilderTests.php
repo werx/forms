@@ -342,4 +342,49 @@ class InputBuilderTests extends \PHPUnit_Framework_TestCase
 
 		$this->assertEquals($expected, $actual);
 	}
+
+	public function testSelectStateBuildsExpectedHtml()
+	{
+		Form::clear();
+
+		$actual = (string) Form::selectState('state');
+
+		$this->assertContains('<option value="AR">Arkansas</option>', $actual);
+	}
+
+	public function testSelectStateBuildsExpectedHtmlWithValue()
+	{
+		Form::clear();
+
+		$actual = (string) Form::selectState('state')->selected('AR');
+
+		$this->assertContains('<option selected="selected" value="AR">Arkansas</option>', $actual);
+	}
+
+	public function testSelectCountyBuildsExpectedHtmlForDefaultState()
+	{
+		Form::clear();
+
+		$actual = (string) Form::selectCounty('county');
+
+		$this->assertContains('<option value="Pulaski">Pulaski</option>', $actual);
+	}
+
+	public function testSelectCountyBuildsExpectedHtmlWithValueForDefaultState()
+	{
+		Form::clear();
+
+		$actual = (string) Form::selectCounty('county')->selected('Pulaski');
+
+		$this->assertContains('<option selected="selected" value="Pulaski">Pulaski</option>', $actual);
+	}
+
+	public function testSelectCountyBuildsExpectedHtmlForState()
+	{
+		Form::clear();
+
+		$actual = (string) Form::selectCounty('county')->forState('TX');
+
+		$this->assertContains('<option value="Dallas">Dallas</option>', $actual);
+	}
 }

@@ -190,6 +190,26 @@ class Form
 	/**
 	 * @param null $name
 	 * @param null $id
+	 * @return \werx\Forms\SelectState
+	 */
+	public static function selectState($name = null, $id = null)
+	{
+		return new selectState($name, $id);
+	}
+
+	/**
+	 * @param null $name
+	 * @param null $id
+	 * @return \werx\Forms\SelectCounty
+	 */
+	public static function selectCounty($name = null, $id = null)
+	{
+		return new selectCounty($name, $id);
+	}
+
+	/**
+	 * @param null $name
+	 * @param null $id
 	 * @return \werx\Forms\Submit
 	 */
 	public static function submit($name = null, $id = null)

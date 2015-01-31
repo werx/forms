@@ -194,7 +194,7 @@ class Form
 	 */
 	public static function selectState($name = null, $id = null)
 	{
-		return new selectState($name, $id);
+		return new SelectState($name, $id);
 	}
 
 	/**
@@ -204,7 +204,7 @@ class Form
 	 */
 	public static function selectCounty($name = null, $id = null)
 	{
-		return new selectCounty($name, $id);
+		return new SelectCounty($name, $id);
 	}
 
 	/**

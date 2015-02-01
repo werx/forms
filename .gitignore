@@ -3,4 +3,5 @@
 composer.lock
 vendor
 tests/coverage-report
+tests/examples
 .idea

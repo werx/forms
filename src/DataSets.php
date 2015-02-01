@@ -2,7 +2,7 @@
 
 namespace werx\Forms;
 
-class Data
+class DataSets
 {
 	/**
 	 * @return mixed

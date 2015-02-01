@@ -8,6 +8,16 @@ class SelectState extends Select
 	protected $label;
 	protected $use_array_values = false;
 
+	/**
+	 * @param bool $value
+	 * @return $this
+	 */
+	public function useDisplayNameForValue($value = true)
+	{
+		$this->use_array_values = $value;
+		return $this;
+	}
+
 	public function __toString()
 	{
 		$selected = $this->getValue()->getAttribute('value');
@@ -59,6 +69,6 @@ class SelectState extends Select
 
 	protected function getDefaultData()
 	{
-		return Data::states();
+		return DataSets::states();
 	}
 }

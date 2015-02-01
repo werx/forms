@@ -361,6 +361,25 @@ class InputBuilderTests extends \PHPUnit_Framework_TestCase
 		$this->assertContains('<option selected="selected" value="AR">Arkansas</option>', $actual);
 	}
 
+	public function testSelectStateBuildsExpectedHtmlWithLabel()
+	{
+		Form::clear();
+
+		$actual = (string) Form::selectState('state')->label('Choose State');
+
+		$this->assertContains('<option value="AR">Arkansas</option>', $actual);
+		$this->assertContains('<option value="">Choose State</option>', $actual);
+	}
+
+	public function testSelectStateCanUseDisplayNameForValue()
+	{
+		Form::clear();
+
+		$actual = (string) Form::selectState('state')->selected('Arkansas')->useDisplayNameForValue(true);
+
+		$this->assertContains('<option selected="selected" value="Arkansas">Arkansas</option>', $actual);
+	}
+
 	public function testSelectCountyBuildsExpectedHtmlForDefaultState()
 	{
 		Form::clear();
@@ -387,4 +406,15 @@ class InputBuilderTests extends \PHPUnit_Framework_TestCase
 
 		$this->assertContains('<option value="Dallas">Dallas</option>', $actual);
 	}
+
+	public function testSelectCountyBuildsExpectedHtmlWithLabel()
+	{
+		Form::clear();
+
+		$actual = (string) Form::selectCounty('county')->forState('AR')->label('Choose County');
+
+		$this->assertContains('<option value="">Choose County</option>', $actual);
+		$this->assertContains('<option value="Pulaski">Pulaski</option>', $actual);
+	}
+
 }

@@ -17,6 +17,10 @@ class Input
 {
 	protected $attributes = [];
 
+	/**
+	 * @param null $name
+	 * @param null $id
+	 */
 	public function __construct($name = null, $id = null)
 	{
 		Form::getInstance();
@@ -34,6 +38,11 @@ class Input
 		return $this;
 	}
 
+	/**
+	 * @param null $default
+	 * @param bool $escape
+	 * @return $this
+	 */
 	public function getValue($default = null, $escape = true)
 	{
 		// First, see if there is already a value attribute. If so, use it.
@@ -52,6 +61,9 @@ class Input
 		return $this;
 	}
 
+	/**
+	 * @return $this
+	 */
 	public function required()
 	{
 		$this->attribute('required', 'required');
@@ -59,6 +71,11 @@ class Input
 		return $this;
 	}
 
+	/**
+	 * @param $key
+	 * @param null $value
+	 * @return $this
+	 */
 	public function attribute($key, $value = null)
 	{
 		$this->attributes[$key] = $value;
@@ -66,6 +83,11 @@ class Input
 		return $this;
 	}
 
+	/**
+	 * @param $key
+	 * @param null $default
+	 * @return null
+	 */
 	public function getAttribute($key, $default = null)
 	{
 		return array_key_exists($key, $this->attributes) ? $this->attributes[$key] : $default;

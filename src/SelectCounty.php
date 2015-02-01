@@ -74,6 +74,6 @@ class SelectCounty extends Select
 	 */
 	protected function getDefaultData()
 	{
-		return Data::counties($this->state);
+		return DataSets::counties($this->state);
 	}
 }

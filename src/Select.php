@@ -2,17 +2,32 @@
 
 namespace werx\Forms;
 
+/**
+ * Class Select
+ *
+ * @package werx\Forms
+ *
+ */
 class Select extends Input
 {
 	protected $data;
 	protected $label;
 	protected $use_array_values = false;
 
+	/**
+	 * @param $value
+	 * @return $this
+	 */
 	public function selected($value)
 	{
 		return $this->value($value);
 	}
 
+	/**
+	 * @param array $data
+	 * @param bool $use_array_values
+	 * @return $this
+	 */
 	public function data($data = [], $use_array_values = false)
 	{
 		$this->data = $data;
@@ -20,6 +35,11 @@ class Select extends Input
 		return $this;
 	}
 
+	/**
+	 * @param $display
+	 * @param string $value
+	 * @return $this
+	 */
 	public function label($display, $value = '')
 	{
 		$this->label = (object) array('display' => $display, 'value' => $value);

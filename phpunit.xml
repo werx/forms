@@ -13,6 +13,7 @@
     <testsuites>
         <testsuite name="LibraryTests">
             <directory suffix=".php">./tests/</directory>
+            <exclude>./tests/examples</exclude>
         </testsuite>
     </testsuites>
 

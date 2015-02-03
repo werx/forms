@@ -80,6 +80,13 @@ Form::setData($_POST);
 <?=Form::radio('color')->value('Green')?> Green
 ```
 
+Use the `conditionalChecked` method if you want to check something pending some condition.
+``` php
+<?=Form::radio('color')->value('Red')->conditionalChecked($some_value, 'Red')?> Red
+<?=Form::radio('color')->value('Blue')->conditionalChecked($some_value, 'Blue')?> Blue
+<?=Form::radio('color')->value('Green')->conditionalChecked($some_value, 'Green')?> Green
+```
+
 ## Installation
 This package is installable and autoloadable via Composer as [werx/forms](https://packagist.org/packages/werx/forms). If you aren't familiar with the Composer Dependency Manager for PHP, [you should read this first](https://getcomposer.org/doc/00-intro.md).
 

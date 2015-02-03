@@ -6,7 +6,12 @@ namespace werx\Forms;
  * Class Select
  *
  * @package werx\Forms
- *
+ * @method Select style($style) CSS Style Attributes
+ * @method Select class($class) CSS Classes to apply
+ * @method Select value($value) Default Value
+ * @method Select id($id) Element Id
+ * @method Select name($name) Element Name
+ * @method Select placeholder($value) Placeholder for input
  */
 class Select extends Input
 {

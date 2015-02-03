@@ -194,6 +194,43 @@ class InputBuilderTests extends \PHPUnit_Framework_TestCase
 		$this->assertEquals($expected, $actual);
 	}
 
+	public function testCheckBoxCanConditionallySetSelectedMatching()
+	{
+		Form::clear();
+
+		$actual = (string) Form::checkbox('pets')->value('Cat')->conditionalChecked('foo', 'foo');
+		$expected = '<input type="checkbox" name="pets" id="pets" value="Cat" checked="checked" />';
+
+		$this->assertEquals($expected, $actual);
+	}
+
+	public function testCheckBoxCanConditionallySetSelectedNonMatching()
+	{
+		Form::clear();
+
+		$actual = (string) Form::checkbox('pets')->value('Cat')->conditionalChecked('foo', 'bar');
+		$expected = '<input type="checkbox" name="pets" id="pets" value="Cat" />';
+
+		$this->assertEquals($expected, $actual);
+	}
+
+	public function testCheckBoxConditionalSetJunkArgs()
+	{
+		Form::clear();
+
+		$actual = (string) Form::checkbox('pets')->value('Cat')->conditionalChecked('foo');
+		$expected = '<input type="checkbox" name="pets" id="pets" value="Cat" />';
+
+		$this->assertEquals($expected, $actual);
+
+		Form::clear();
+
+		$actual = (string) Form::radio('pets')->value('Cat')->conditionalChecked();
+		$expected = '<input type="radio" name="pets" id="pets" value="Cat" />';
+
+		$this->assertEquals($expected, $actual);
+	}
+
 	public function testRadioBuildsExpectedHtml()
 	{
 		Form::clear();
@@ -229,6 +266,43 @@ class InputBuilderTests extends \PHPUnit_Framework_TestCase
 
 		$actual = (string) Form::radio('pet')->value('Cat')->checked();
 		$expected = '<input type="radio" name="pet" id="pet" value="Cat" checked="checked" />';
+
+		$this->assertEquals($expected, $actual);
+	}
+
+	public function testRadioCanConditionallySetSelectedMatching()
+	{
+		Form::clear();
+
+		$actual = (string) Form::radio('pets')->value('Cat')->conditionalChecked('foo', 'foo');
+		$expected = '<input type="radio" name="pets" id="pets" value="Cat" checked="checked" />';
+
+		$this->assertEquals($expected, $actual);
+	}
+
+	public function testRadioCanConditionallySetSelectedNonMatching()
+	{
+		Form::clear();
+
+		$actual = (string) Form::radio('pets')->value('Cat')->conditionalChecked('foo', 'bar');
+		$expected = '<input type="radio" name="pets" id="pets" value="Cat" />';
+
+		$this->assertEquals($expected, $actual);
+	}
+
+	public function testRadioConditionalSetJunkArgs()
+	{
+		Form::clear();
+
+		$actual = (string) Form::radio('pets')->value('Cat')->conditionalChecked('foo');
+		$expected = '<input type="radio" name="pets" id="pets" value="Cat" />';
+
+		$this->assertEquals($expected, $actual);
+
+		Form::clear();
+
+		$actual = (string) Form::radio('pets')->value('Cat')->conditionalChecked();
+		$expected = '<input type="radio" name="pets" id="pets" value="Cat" />';
 
 		$this->assertEquals($expected, $actual);
 	}

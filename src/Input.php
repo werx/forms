@@ -6,12 +6,12 @@ namespace werx\Forms;
  * Class Input
  * @package werx\Forms
  *
- * @method style($style) CSS Style Attributes
- * @method class($class) CSS Classes to apply
- * @method value($value) Default Value
- * @method id($id) Element Id
- * @method name($name) Element Name
- * @method placeholder($value) Placeholder for input
+ * @method $this style($style) CSS Style Attributes
+ * @method $this class($class) CSS Classes to apply
+ * @method $this value($value) Default Value
+ * @method $this id($id) Element Id
+ * @method $this name($name) Element Name
+ * @method $this placeholder($value) Placeholder for input
  */
 class Input
 {

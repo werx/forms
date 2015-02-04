@@ -231,6 +231,40 @@ class InputBuilderTests extends \PHPUnit_Framework_TestCase
 		$this->assertEquals($expected, $actual);
 	}
 
+	public function testCheckedWhenFalseConditionShouldNotCheckItem()
+	{
+		Form::clear();
+
+		$actual = (string) Form::checkbox('pets')->value('Cat')->checkedWhen(false);
+		$expected = '<input type="checkbox" name="pets" id="pets" value="Cat" />';
+
+		$this->assertEquals($expected, $actual);
+
+		Form::clear();
+
+		$actual = (string) Form::radio('pets')->value('Cat')->checkedWhen(false);
+		$expected = '<input type="radio" name="pets" id="pets" value="Cat" />';
+
+		$this->assertEquals($expected, $actual);
+	}
+
+	public function testCheckedWhenTrueConditionShouldCheckItem()
+	{
+		Form::clear();
+
+		$actual = (string) Form::checkbox('pets')->value('Cat')->checkedWhen(true);
+		$expected = '<input type="checkbox" name="pets" id="pets" value="Cat" checked="checked" />';
+
+		$this->assertEquals($expected, $actual);
+
+		Form::clear();
+
+		$actual = (string) Form::radio('pets')->value('Cat')->checkedWhen(true);
+		$expected = '<input type="radio" name="pets" id="pets" value="Cat" checked="checked" />';
+
+		$this->assertEquals($expected, $actual);
+	}
+
 	public function testRadioBuildsExpectedHtml()
 	{
 		Form::clear();

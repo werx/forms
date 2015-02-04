@@ -56,10 +56,27 @@ class Checkbox extends Input
 	 * @param null $value_1
 	 * @param null $value_2
 	 * @return $this
+	 *
+	 * @deprecated Deprecated the day after it was created. Use checkedWhen() instead.
 	 */
 	public function conditionalChecked($value_1 = null, $value_2 = null)
 	{
 		if (isset($value_1) && isset($value_2) && ($value_1 === $value_2)) {
+			return $this->checked();
+		} else {
+			return $this;
+		}
+	}
+
+	/**
+	 * Check the item if the specified condition evaluates to true.
+	 *
+	 * @param bool $condition
+	 * @return $this|Checkbox
+	 */
+	public function checkedWhen($condition = null)
+	{
+		if ($condition === true) {
 			return $this->checked();
 		} else {
 			return $this;

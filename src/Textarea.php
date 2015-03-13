@@ -25,11 +25,9 @@ class Textarea extends Input
 	{
 		$attribute_parts = [];
 
-		$value = $this->getAttribute('value');
+		$value = $this->getValue()->getAttribute('value');
 
-		if (!empty($value)) {
-			unset($this->attributes['value']);
-		}
+		unset($this->attributes['value']);
 
 		foreach ($this->attributes as $k => $v) {
 			$attribute_parts[] = sprintf('%s="%s"', $k, $v);

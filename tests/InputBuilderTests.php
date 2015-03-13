@@ -451,6 +451,18 @@ class InputBuilderTests extends \PHPUnit_Framework_TestCase
 		$this->assertEquals($expected, $actual);
 	}
 
+	public function testTextAreaBuildsExpectedHtmlFromSetData()
+	{
+		Form::clear();
+
+		Form::setData(['test' => 'Foo']);
+
+		$actual = (string) Form::textarea('test');
+		$expected = '<textarea name="test" id="test">Foo</textarea>';
+
+		$this->assertEquals($expected, $actual);
+	}
+
 	public function testSelectStateBuildsExpectedHtml()
 	{
 		Form::clear();

@@ -76,6 +76,10 @@ class Select extends Input
 			$options[] = sprintf('<option value="%s">%s</option>', $this->label->value, $this->label->display);
 		}
 
+		if (empty($this->data)) {
+			$this->data = $this->getDefaultData();
+		}
+
 		foreach ($this->data as $k => $v) {
 			if ($this->use_array_values) {
 				// Using the array value as the option value, instead of the array index.
@@ -93,5 +97,14 @@ class Select extends Input
 		$html[] = '</select>';
 		
 		return join('', $html);
+	}
+
+	/**
+	 * Overridden in child classes: SelectCounty, SelectState
+	 * @return array
+	 */
+	protected function getDefaultData()
+	{
+		return [];
 	}
 }

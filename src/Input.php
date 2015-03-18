@@ -26,7 +26,7 @@ class Input
 		Form::getInstance();
 
 		if ($id == null) {
-			$id = $name;
+			$id = preg_replace('/[^0-9A-Za-z_-]*/', '', $name);
 		}
 
 		$this->attribute('name', $name);
@@ -36,6 +36,14 @@ class Input
 		}
 
 		return $this;
+	}
+
+	/**
+	 * Filters a variable reference for XSS.
+	 * @param $value
+	 */
+	protected function filter(&$value) {
+		$value = htmlspecialchars($value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
 	}
 
 	/**
@@ -53,7 +61,11 @@ class Input
 		}
 
 		if ($escape === true) {
-			$value = htmlspecialchars($value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+			if (is_scalar($value)) {
+				$value = htmlspecialchars($value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+			} elseif (is_array($value)) {
+				array_walk_recursive($value, [$this, 'filter']);
+			}
 		}
 
 		$this->attribute('value', $value);

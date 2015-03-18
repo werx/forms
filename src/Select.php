@@ -18,6 +18,7 @@ class Select extends Input
 	protected $data;
 	protected $label;
 	protected $use_array_values = false;
+	protected $multiple = false;
 
 	/**
 	 * @param $value
@@ -52,9 +53,20 @@ class Select extends Input
 		return $this;
 	}
 
+	public function multiple($multiple = true)
+	{
+		$this->multiple = $multiple;
+
+		return $this;
+	}
+
 	public function __toString()
 	{
 		$selected = $this->getValue()->getAttribute('value');
+
+		if (is_array($selected)) {
+			$this->multiple();
+		}
 
 		$attribute_parts = [];
 
@@ -66,6 +78,10 @@ class Select extends Input
 			}
 
 			$attribute_parts[] = sprintf('%s="%s"', $k, $v);
+		}
+
+		if ($this->multiple) {
+			$attribute_parts[] = 'multiple';
 		}
 
 		$html[] = sprintf('<select %s>', join(' ', $attribute_parts));
@@ -86,7 +102,7 @@ class Select extends Input
 				$k = $v;
 			}
 
-			if ($k == $selected) {
+			if ((is_array($selected) && in_array($k, $selected)) ||  $k == $selected) {
 				$options[] = sprintf('<option selected="selected" value="%s">%s</option>', $k, $v);
 			} else {
 				$options[] = sprintf('<option value="%s">%s</option>', $k, $v);

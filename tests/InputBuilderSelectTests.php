@@ -65,6 +65,26 @@ class InputBuilderSelectTests extends \PHPUnit_Framework_TestCase
 		$this->assertEquals($expected, $actual);
 	}
 
+	public function testSelectCanSetSelectedWithMultipleValues()
+	{
+		Form::clear();
+
+		$actual = (string) Form::select('state[]')->selected(['TX', 'AR'])->data(['TX' => 'Texas', 'AR' => 'Arkansas', 'OK' => 'Oklahoma']);
+		$expected = '<select name="state[]" id="state" multiple><option selected="selected" value="TX">Texas</option><option selected="selected" value="AR">Arkansas</option><option value="OK">Oklahoma</option></select>';
+
+		$this->assertEquals($expected, $actual);
+	}
+
+	public function testSelectCanSetSelectedWithMultipleValuesXSSFiltered()
+	{
+		Form::clear();
+
+		$actual = (string) Form::select('state[]')->selected(['TX <script>alert("XSS")</script>', 'AR'])->data(['TX' => 'Texas', 'AR' => 'Arkansas', 'OK' => 'Oklahoma']);
+		$expected = '<select name="state[]" id="state" multiple><option value="TX">Texas</option><option selected="selected" value="AR">Arkansas</option><option value="OK">Oklahoma</option></select>';
+
+		$this->assertEquals($expected, $actual);
+	}
+
 	public function testSelectCanSetSelectedFromFormDataExplicit()
 	{
 		Form::clear();

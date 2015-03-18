@@ -1,6 +1,6 @@
 # werx\Forms
 
-[![Build Status](https://travis-ci.org/werx/forms.png?branch=master)](https://travis-ci.org/werx/forms) [![Total Downloads](https://poser.pugx.org/werx/forms/downloads.png)](https://packagist.org/packages/werx/forms) [![Latest Stable Version](https://poser.pugx.org/werx/forms/v/stable.png)](https://packagist.org/packages/werx/forms)
+[![Build Status](https://img.shields.io/travis/werx/forms.svg?style=flat-square)](https://travis-ci.org/werx/forms) [![Total Downloads](https://img.shields.io/packagist/dt/werx/forms.svg?style=flat-square)](https://packagist.org/packages/werx/forms) [![Latest Stable Version](https://img.shields.io/github/tag/werx/forms.svg?label=version&style=flat-square)](https://packagist.org/packages/werx/forms) [![Code Climate](https://img.shields.io/codeclimate/github/werx/forms.svg?style=flat-square)](https://codeclimate.com/github/werx/forms/code)
 
 Framework agnostic form helpers.
 

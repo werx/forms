@@ -75,6 +75,9 @@ class Form
 	{
 		$instance = static::getInstance();
 
+		// Handle arrays such as checkbox groups.
+		$key = str_replace('[]', '', $key);
+
 		$value = array_key_exists($key, $instance->data) ? $instance->data[$key] : $default;
 
 		if ($escape === true) {

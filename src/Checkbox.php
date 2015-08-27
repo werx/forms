@@ -44,7 +44,7 @@ class Checkbox extends Input
 				$this->checked();
 			}
 		} elseif ($type == 'checkbox') {
-			if (in_array($item_value, $values)) {
+			if (in_array($item_value, (array) $values)) {
 				$this->checked();
 			}
 		}

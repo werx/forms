@@ -81,7 +81,7 @@ class Form
 		$value = array_key_exists($key, $instance->data) ? $instance->data[$key] : $default;
 
 		if ($escape === true) {
-			return htmlspecialchars($value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+			return htmlspecialchars($value, ENT_COMPAT | ENT_SUBSTITUTE, 'UTF-8');
 		} else {
 			return $value;
 		}

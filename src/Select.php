@@ -103,9 +103,9 @@ class Select extends Input
 			}
 
 			if ((is_array($selected) && in_array($k, $selected)) ||  $k == $selected) {
-				$options[] = sprintf('<option selected="selected" value="%s">%s</option>', $k, $v);
+				$options[] = sprintf('<option selected="selected" value="%s">%s</option>', $this->filter($k), $this->filter($v));
 			} else {
-				$options[] = sprintf('<option value="%s">%s</option>', $k, $v);
+				$options[] = sprintf('<option value="%s">%s</option>', $this->filter($k), $this->filter($v));
 			}
 		}
 

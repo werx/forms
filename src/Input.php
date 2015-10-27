@@ -40,10 +40,23 @@ class Input
 
 	/**
 	 * Filters a variable reference for XSS.
+	 * 
 	 * @param $value
+	 * @return string
 	 */
-	protected function filter(&$value) {
-		$value = htmlspecialchars($value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+	protected function filter(&$value)
+	{
+		if (is_scalar($value)) {
+			return htmlspecialchars($value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+		} elseif (is_array($value)){
+			array_walk_recursive($value, [$this, 'filter']);
+		} elseif (is_object($value)) {
+			foreach (get_object_vars($value) as $k => $v) {
+				$value->$k = $this->filter($value);
+			}
+		}
+
+		return $value;
 	}
 
 	/**
@@ -61,11 +74,7 @@ class Input
 		}
 
 		if ($escape === true) {
-			if (is_scalar($value)) {
-				$value = htmlspecialchars($value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
-			} elseif (is_array($value)) {
-				array_walk_recursive($value, [$this, 'filter']);
-			}
+			$this->filter($value);
 		}
 
 		$this->attribute('value', $value);

@@ -85,6 +85,26 @@ class InputBuilderSelectTests extends \PHPUnit_Framework_TestCase
 		$this->assertEquals($expected, $actual);
 	}
 
+	public function testSelectCanFilterXSSValue()
+	{
+		Form::clear();
+
+		$actual = (string) Form::select('state[]')->selected('AR')->data(['<script>alert("XSS")</script>' => 'Texas', 'AR' => 'Arkansas', 'OK' => 'Oklahoma']);
+		$expected = '<select name="state[]" id="state"><option value="&lt;script&gt;alert(&quot;XSS&quot;)&lt;/script&gt;">Texas</option><option selected="selected" value="AR">Arkansas</option><option value="OK">Oklahoma</option></select>';
+
+		$this->assertEquals($expected, $actual);
+	}
+
+	public function testSelectCanFilterXSSData()
+	{
+		Form::clear();
+
+		$actual = (string) Form::select('state[]')->selected('AR')->data(['TX' => '<script>alert("XSS")</script>', 'AR' => 'Arkansas', 'OK' => 'Oklahoma']);
+		$expected = '<select name="state[]" id="state"><option value="TX">&lt;script&gt;alert(&quot;XSS&quot;)&lt;/script&gt;</option><option selected="selected" value="AR">Arkansas</option><option value="OK">Oklahoma</option></select>';
+
+		$this->assertEquals($expected, $actual);
+	}
+
 	public function testSelectCanSetSelectedFromFormDataExplicit()
 	{
 		Form::clear();

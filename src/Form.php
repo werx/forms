@@ -254,11 +254,11 @@ class Form
 	 * @param string $checked_html
 	 * @return string
 	 */
-	public static function getChecked($key, $value = null, $checked_html = 'checked = "checked"')
+	public static function getChecked($key, $value = null, $checked_html = 'checked = "checked"' , $default = null)
 	{
 		$instance = static::getInstance();
 
-		$selected = $instance->getValue($key, null, false);
+		$selected = $instance->getValue($key, $default, false);
 
 		$checked = false;
 
@@ -279,8 +279,8 @@ class Form
 	 * @param string $checked_html
 	 * @return string
 	 */
-	public static function getSelected($key, $value = null, $checked_html = 'selected = "selected"')
+	public static function getSelected($key, $value = null, $checked_html = 'selected = "selected"', $default=null)
 	{
-		return static::getChecked($key, $value, $checked_html);
+		return static::getChecked($key, $value, $checked_html,$default);
 	}
 }

@@ -12,11 +12,11 @@ namespace werx\Forms;
  * @method Submit name($name) Element Name
  * @method Submit placeholder($value) Placeholder for input
  */
-class Submit extends Button
+class Submit extends Input
 {
 	public function __construct($name = null, $id = null)
 	{
-		$this->attributes['type'] = 'submit';
+		$this->attribute('type', 'submit');
 
 		return parent::__construct($name, $id);
 	}

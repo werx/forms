@@ -101,7 +101,7 @@ $ composer require werx/forms --prefer-dist
 
 ### Unit Testing
 
-	$ vendor/bin/phpunit
+	$ composer test
 
 ### Coding Standards
 This library uses [PHP_CodeSniffer](http://www.squizlabs.com/php-codesniffer) to ensure coding standards are followed.
@@ -110,7 +110,8 @@ I have adopted the [PHP FIG PSR-2 Coding Standard](http://www.php-fig.org/psr/ps
 
 To support indenting with tabs, I've defined a custom PSR-2 ruleset that extends the standard [PSR-2 ruleset used by PHP_CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer/blob/master/CodeSniffer/Standards/PSR2/ruleset.xml). You can find this ruleset in the root of this project at PSR2Tabs.xml
 
-Executing the codesniffer command from the root of this project to run the sniffer using these custom rules.
+Execute the codesniffer command from the root of this project to run the sniffer using these custom rules and codefixer command to correct them.
 
 
-	$ ./codesniffer
+	$ composer codesniffer
+	$ composer codefixer

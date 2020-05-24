@@ -11,6 +11,9 @@
 		<exclude name="Generic.WhiteSpace.ScopeIndent" />
 		<exclude name="Generic.WhiteSpace.DisallowTabIndent" />
 		<exclude name="PSR2.ControlStructures.SwitchDeclaration" />
+
+		<!-- I don't really care about line length -->
+		<exclude name="Generic.Files.LineLength" />
 	</rule>
 
 	<!-- Break PSR-2 by requiring tabs instead of spaces for indentation. -->

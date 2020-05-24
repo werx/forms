@@ -17,18 +17,25 @@
 
     "require-dev": {
         "phpunit/phpunit": "~4.4",
-        "squizlabs/php_codesniffer": "~2.2",
-	  	"league/plates": "~2.1"
+        "squizlabs/php_codesniffer": "~2.2"
     },
 
-	"suggest": {
-	  "league/plates": "~2.1"
-	},
-        	
 	"autoload":	{
 		"psr-4": {
 			"werx\\Forms\\": "src/",
-			"werx\\Forms\\Tests\\": "tests/"
+			"werx\\FormsTests\\": "tests/"
 		}
+	},
+
+	"scripts": {
+		"codesniffer": [
+			"vendor/bin/phpcs --standard=\"./PSR2Tabs.xml\" -p -v --ignore=vendor/* --extensions=php ."
+		],
+		"codefixer": [
+			"vendor/bin/phpcbf --standard=\"./PSR2Tabs.xml\" --ignore=vendor/* --extensions=php ."
+		],
+		"test": [
+			"vendor/bin/phpunit"
+		]
 	}
 }

@@ -5,8 +5,6 @@ namespace werx\Forms;
 /**
  * Class Form
  * @package werx\Forms
- *
- * @TODO Add radio, checkbox, and textarea support.
  */
 class Form
 {
@@ -254,7 +252,7 @@ class Form
 	 * @param string $checked_html
 	 * @return string
 	 */
-	public static function getChecked($key, $value = null, $checked_html = 'checked = "checked"' , $default = null)
+	public static function getChecked($key, $value = null, $checked_html = 'checked = "checked"', $default = null)
 	{
 		$instance = static::getInstance();
 
@@ -279,8 +277,18 @@ class Form
 	 * @param string $checked_html
 	 * @return string
 	 */
-	public static function getSelected($key, $value = null, $checked_html = 'selected = "selected"', $default=null)
+	public static function getSelected($key, $value = null, $checked_html = 'selected = "selected"', $default = null)
 	{
-		return static::getChecked($key, $value, $checked_html,$default);
+		return static::getChecked($key, $value, $checked_html, $default);
+	}
+
+	/**
+	 * @param null $label
+	 * @param null $for
+	 * @return Label
+	 */
+	public static function label($label = null, $for = null)
+	{
+		return new Label($label, $for);
 	}
 }

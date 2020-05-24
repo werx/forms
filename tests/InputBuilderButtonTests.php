@@ -1,5 +1,5 @@
 <?php
-namespace werx\Forms\Tests;
+namespace werx\FormsTests;
 
 use werx\Forms\Form;
 

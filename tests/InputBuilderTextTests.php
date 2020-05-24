@@ -1,5 +1,5 @@
 <?php
-namespace werx\Forms\Tests;
+namespace werx\FormsTests;
 
 use werx\Forms\Form;
 
@@ -52,7 +52,6 @@ class InputBuilderTextTests extends \PHPUnit_Framework_TestCase
 		$actual = (string) Form::text('test');
 		$expected = '<input name="test" id="test" type="text" value="werx" />';
 		$this->assertEquals($expected, $actual);
-
 	}
 
 	public function testTextCanSetDataWithDefaultOnMissingValue()

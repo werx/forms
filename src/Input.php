@@ -40,15 +40,15 @@ class Input
 
 	/**
 	 * Filters a variable reference for XSS.
-	 * 
+	 *
 	 * @param $value
-	 * @return string
+	 * @return mixed
 	 */
 	protected function filter(&$value)
 	{
 		if (is_scalar($value)) {
 			return htmlspecialchars($value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
-		} elseif (is_array($value)){
+		} elseif (is_array($value)) {
 			array_walk_recursive($value, [$this, 'filter']);
 		} elseif (is_object($value)) {
 			foreach (get_object_vars($value) as $k => $v) {

@@ -22,8 +22,13 @@
 
 	"autoload":	{
 		"psr-4": {
-			"werx\\Forms\\": "src/",
-			"werx\\FormsTests\\": "tests/"
+			"werx\\Forms\\": "src/"
+		}
+	},
+
+	"autoload-dev":	{
+		"psr-4": {
+			"werxFormsTests\\": "tests/"
 		}
 	},
 
